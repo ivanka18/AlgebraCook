@@ -42,8 +42,18 @@ Route::group(['middleware' => 'web'], function () {
 		 - form za izmjenu odabranog recepta
 		 - spremanje izmijenjenog recepta u bazu
 	*/
+	Route::get('/recipes', 'RecipesController@index');
 	
+	Route::get('/recipes/add', 'RecipesController@add');
+	Route::post('/recipes/add', 'RecipesController@save');
+	
+	Route::get('/recipes/view/{id}', 'RecipesController@view');
+	
+	Route::get('/recipes/edit/{id}', 'RecipesController@edit');
+	Route::post('/recipes/edit', 'RecipesController@update');
 	// User
     Route::get('/profil', 'UsersController@profil');
     Route::post('/profil', 'UsersController@profil');
+	
+	
 });

@@ -30,13 +30,15 @@
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Lijeva strana navbar: link na recepte -->
-				
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/recipes') }}">Recepti</a></li>
+				</ul>
                 <!-- Desna strana navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Linkovi za Prijavu i Registraciju -->
                     @if (Auth::guest())
-                        <li>Prijava</li>
-                        <li>Registracija</li>
+                        <li><a href="{{ url('/login') }}">Prijava</a></li>			<!--dodala <a>-->
+                        <li><a href="{{ url('/register') }}">Registracija</a></li>			<!--dodala <a>-->
                     @else
                         <li class="dropdown">
                             <!-- Dropdown menu za promjenu lozinke i odjavu -->
@@ -45,8 +47,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><i class="fa fa-btn fa-cog"></i>Profil</li>
-                                <li><i class="fa fa-btn fa-sign-out"></i>Odjava</li>
+                                <li><a href="{{ url('/profil') }}"><i class="fa fa-btn fa-cog"></i>Profil</a></li>		<!--dodala <a>-->
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Odjava</a></li>		<!--dodala <a>-->
                             </ul>
                         </li>
                     @endif
@@ -59,8 +61,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @yield('script')
-	
-    <!-- Ako ima grešaka stvoriti blok za ispis grešaka -->
+	<!-- Ako ima grešaka stvoriti blok za ispis grešaka -->
+	@if (count($errors) > 0)
+		<ul>
+			@foreach ($errors->all() as $error)
+				<li> {{ $error }} </li>
+			@endforeach
+		</ul>
+	@endif
+    
 
 
 </body>
